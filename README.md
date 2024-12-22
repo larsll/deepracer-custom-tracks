@@ -30,6 +30,18 @@ Two other commands are available:
 * `make copy-src TARGET=<your_simapp_path>` - this will copy the files into the *source* of the Simapp, i.e from `build/` to `$TARGET/bundle`.
 * `make copy-install TARGET=<your_simapp_path>` - this will copy the files into the *built* bundle in Simapp, i.e from `build/` to `$TARGET/install/deepracer_simulation_environment/share/deepracer_simulation_environment/`.
 
+## Altering the environment
+
+It is possible to alter the environment during runtime. Some tracks, e.g. `2024_reinvent_champ_custom` have different parts of the world that can be made invisible.
+
+To try this out:
+* Copy from `scripts` folder `alter_environment_0.sh`, `alter_environment_iterator.sh` and `alter_environment_random.py` into the `data/scripts` folder of DRfC.
+* Uncomment the `system.env` line `DR_ROBOMAKER_MOUNT_SCRIPTS_DIR=${DR_DIR}/data/scripts` (or add, if you don't have it).
+* Set the DR_WORLD to `2024_reinvent_champ_custom`
+* Start training
+
+This code will randomize the world when the Robomaker starts (`alter_environment_0.sh`), and if you want to change things over time then put `alter_environment_iterator.sh` into a crontab (or execute manually), it will then run `alter_environment_random.py` in each running Robomaker container.
+
 ## Contributing
 
 The repository is open for contributors' tracks. See [CONTRIBUTING](CONTRIBUTING.md) for details.
